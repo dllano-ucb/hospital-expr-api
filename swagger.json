@@ -1,0 +1,237 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Persona API",
+      "description": "API for managing Persona resources",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/api",
+        "description": "Local development server"
+      }
+    ],
+    "paths": {
+      "/personas": {
+        "get": {
+          "summary": "Get all personas",
+          "description": "Retrieve a list of all personas",
+          "responses": {
+            "200": {
+              "description": "A list of personas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": { "$ref": "#/components/schemas/Persona" }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server error"
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new persona",
+          "description": "Create a new persona with the provided information",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Persona" }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Persona created successfully",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Persona" }
+                }
+              }
+            },
+            "500": {
+              "description": "Server error"
+            }
+          }
+        }
+      },
+      "/personas/{id}": {
+        "get": {
+          "summary": "Get persona by ID",
+          "description": "Retrieve a persona by its ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "The ID of the persona to retrieve"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Persona found",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Persona" }
+                }
+              }
+            },
+            "404": {
+              "description": "Persona not found"
+            },
+            "500": {
+              "description": "Server error"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update persona by ID",
+          "description": "Update an existing persona by its ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "The ID of the persona to update"
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Persona" }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Persona updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Persona" }
+                }
+              }
+            },
+            "404": {
+              "description": "Persona not found"
+            },
+            "500": {
+              "description": "Server error"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete persona by ID",
+          "description": "Delete an existing persona by its ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "The ID of the persona to delete"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Persona deleted successfully"
+            },
+            "404": {
+              "description": "Persona not found"
+            },
+            "500": {
+              "description": "Server error"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Persona": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "The unique identifier of the persona"
+            },
+            "nombres": {
+              "type": "string",
+              "description": "First name of the persona"
+            },
+            "apellidos": {
+              "type": "string",
+              "description": "Last name of the persona"
+            },
+            "edad": {
+              "type": "integer",
+              "description": "Age of the persona"
+            },
+            "sexo": {
+              "type": "string",
+              "description": "Gender of the persona"
+            },
+            "direccion": {
+              "type": "string",
+              "description": "Address of the persona"
+            },
+            "telefono": {
+              "type": "string",
+              "description": "Phone number of the persona"
+            },
+            "correo": {
+              "type": "string",
+              "description": "Email address of the persona"
+            },
+            "tipo_sangre": {
+              "type": "string",
+              "description": "Blood type of the persona"
+            },
+            "fecha_nacimiento": {
+              "type": "string",
+              "format": "date",
+              "description": "Birth date of the persona"
+            },
+            "estado_civil": {
+              "type": "string",
+              "description": "Marital status of the persona"
+            },
+            "ocupacion": {
+              "type": "string",
+              "description": "Occupation of the persona"
+            },
+            "religion": {
+              "type": "string",
+              "description": "Religion of the persona"
+            },
+            "localidad": {
+              "type": "string",
+              "description": "Location of the persona"
+            },
+            "tipo_persona": {
+              "type": "string",
+              "description": "Type of persona (e.g., student, employee, etc.)"
+            },
+            "clave": {
+              "type": "string",
+              "description": "Encrypted key or password for the persona"
+            }
+          },
+          "required": ["nombres", "apellidos", "correo", "tipo_persona", "clave"]
+        }
+      }
+    }
+  }
+  
